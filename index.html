@@ -1,0 +1,301 @@
+<html>
+<head>
+<title>Final Project</title>
+
+ <link rel="stylesheet" href="themes/gursharan.css" /> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3"></script>
+
+
+ <style>
+th, td {
+  padding: 5px;
+  font-size: 0.8em;
+}
+th{
+color:red;
+font-size: 0.8em;
+}
+body{
+
+margin : auto;
+font-size: 1.25em;
+font-family:"Comic Sans MS", cursive, sans-serif;
+
+}
+#map_canvas {
+ 
+   height: 100vh;
+    width: 100%;
+}
+
+
+</style> 
+ </head>
+<body>
+	<div data-role="page" id="p1" data-theme= "D">
+		<div data-role="header">
+			<h1>Home</h1>
+				<div data-role="navbar">
+				<ul>
+				<li><a href = "#p1" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href = "#p2" data-icon="info" data-transition="flip">Report</a></li>
+				<li><a href = "#p3" data-icon="bars" data-transition="flip">Chart</a></li>
+				<li><a class = "map"href = "#p4" data-icon="navigation" data-transition="flip">Map</a></li>
+				</ul>
+				</div>
+		</div>
+		<div data-role="main">
+			<div style="font-size: 0.75em">
+				This Web Mobile App displays the data into various forms. We got <b>Species </b>json file. Here is the description of the various pages.
+					<ul>
+						<li><h3 style="color:red;"> Report </h3>
+						Displays the data of the all the ten characters in tabular form. We used Jquery to retrieve data from the jason file and to display it on the page.
+						</li>
+						<li><h3 style="color:red;"> Chart </h3>
+						Displays the feature "height" of the species in the graphical form. We are displaying height on x-axis and names on the y-axis.
+						</li>
+						<li><h3 style="color:red;"> Map </h3>
+						This page displays the data on google maps. To display markers on the map, we have chosen the height. To calculate Latitude, we have used the formula height%90 and for Longitude height%139.
+						It drops a marker at user's current location. Moreover, if you click on the marker's name that represent species, it will show the name of the species.
+						</li>
+					</ul>
+				<p style="color:red;">Here is the overview of the group members and work done by them.</p>
+				<div >
+				  <h3>Sahil Choudhary</h3>
+					  <div>
+					   <p><ol style="color:red;">
+							<li>Basic Design of the App</li>
+							<li>Home page</li>
+							<li>Textual Display of Data</li>
+							</ol></p>
+					  </div>
+				  <h3>Gursharan Deol</h3>
+						<div>
+						<p><ol style="color:red;">
+								<li>Graphical Display of Data</li>
+								<li>Geographic Representation of Data (using Google Maps Web Service) </li>
+								<li>Theme Roller</li>
+								</ol></p>
+						</div>
+			</div>
+		</div>
+	</div>
+		<div data-role="footer">
+		<a href = "http://swapi.co/api/species/" data-icon="info">For more information visit Swapi</a>
+		</div>
+	</div>
+	
+	<div data-role="page" id="p2" data-theme= "D">
+		<div data-role="header">
+		<h1>Report</h1>
+			<div data-role="navbar">
+				<ul>
+				<li><a href = "#p1" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href = "#p2" data-icon="info" data-transition="flip">Report</a></li>
+				<li><a href = "#p3" data-icon="bars" data-transition="flip">Chart</a></li>
+				<li><a class = "map"href = "#p4" data-icon="navigation" data-transition="flip">Map</a></li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="main">
+			<div data-role="content">
+			<h2 align="CENTER" > 
+			Data Dispaly of the species from star wars
+			</h2>
+				<table id="data" border="1" align="CENTER" cellspacing="0" width="100%"></table>
+			</div>	
+		</div>
+		<div data-role="footer">
+			<a href = "http://swapi.co/api/species/" data-icon="info">For more information visit Swapi</a>
+		</div>
+	</div>
+	
+	<div data-role="page" id="p3" data-theme= "D">
+		<div data-role="header">
+		<h1>Chart</h1>
+			<div data-role="navbar">
+				<ul>
+				<li><a href = "#p1" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href = "#p2" data-icon="info" data-transition="flip">Report</a></li>
+				<li><a href = "#p3" data-icon="bars" data-transition="flip">Chart</a></li>
+				<li><a class = "map"href = "#p4" data-icon="navigation" data-transition="flip">Map</a></li>
+				</ul>
+				</div>
+		</div>
+		<div data-role="main">
+		<h2 align="CENTER" > 
+		Graphical Display of Data
+		<h2>
+			<canvas id="myChart" style="border:1px solid #000000;"></canvas>
+		</div>
+		<div data-role="footer">
+		<a href = "http://swapi.co/api/species/" data-icon="info">For more information visit Swapi</a>
+		</div>
+	</div>
+	
+	<div data-role="page" id="p4" data-theme= "D">
+		<div data-role="header">
+			<h1>Map</h1>
+				<div data-role="navbar">
+				<ul>
+				<li><a href = "#p1" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href = "#p2" data-icon="info" data-transition="flip">Report</a></li>
+				<li><a href = "#p3" data-icon="bars" data-transition="flip">Chart</a></li>
+				<li><a class = "map" href = "#p4" data-icon="navigation" data-transition="flip">Map</a></li>
+				</ul>
+				</div>
+		</div>
+		<div data-role="main">
+		<h2 align="CENTER" > 
+		Geographic Representation of Data (using Google Maps Web Service)
+		<h2>
+			<div id="map_canvas" ></div>
+		</div>
+		<div data-role="footer">
+		<a href = "http://swapi.co/api/species/" data-icon="info">For more information visit Swapi</a>
+		</div>
+	</div>
+<script>
+
+var description = new Array();
+var myvalues = new Array();
+	var rows = [];
+var query = "ses1.json";
+var mycallback = function (data) {
+		var htmlString="<tr> <th > Sr. No. </th> <th > Name </th> <th > Classification </th> <th > Average Height </th> <th> Average Lifespan </th><th > Designation </th> <th > Language </th> <th > Skin colors </th></tr>";
+	
+	$.each(data.species, function(i,sp){
+		htmlString += '<tr><td>' + (i+1) + '</td>';
+        htmlString += '<td>' + sp.name + '</td>';
+        htmlString +=  '<td>' +sp.classification + '</td>';
+        htmlString +=  '<td>' +sp.average_height + '</td>';
+	    htmlString +=  '<td>' +sp.average_lifespan + '</td>';
+	    htmlString +=  '<td>' +sp.designation + '</td>';
+	    htmlString +=  '<td>' +sp.language + '</td>';
+	    htmlString +=  '<td>' +sp.skin_colors + '</td>';
+        htmlString +=  '</tr>';
+		
+		description.push(sp.name);
+		myvalues.push(sp.average_height);
+		//calculating latitude and logitude using heigth%90 and height%139 respectively
+		rows.push([sp.name, sp.average_height%90 , sp.average_height%139]);
+
+    });
+$('#data').html(htmlString);
+};
+
+$.getJSON(query, mycallback);
+//chart
+	var ctx = document.getElementById("myChart").getContext("2d");
+	
+
+var data = {
+
+    labels: description,
+    datasets: [
+        {
+            label: "Height",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: "rgba(255, 128, 128,0.4)",
+            borderColor: "rgba(0, 0, 153,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(0, 0, 153,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(153, 0, 0,1)",
+            pointHoverBorderColor: "rgba(0, 0, 153,0)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data:  myvalues,
+        },
+		
+    ]
+};
+
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options:  {
+        scales: {
+                xAxes: [{
+                        stacked: true
+                }],
+                yAxes: [{
+                        stacked: true
+                }]
+            }
+        }
+    
+});
+//map
+	$('.map').click(function(){
+function mysuccess(pos)
+			{
+				var lat = pos.coords.latitude;
+				var lng = pos.coords.longitude;
+				mapCenter = new google.maps.LatLng(lat,lng);
+				
+				 var mapOptions = {
+      
+          center: mapCenter,
+          zoom: 16,
+		  mapTypeId : google.maps.MapTypeId.ROADMAP
+		  };
+        
+		 
+		
+		var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+		
+		var myLoc = new google.maps.Marker({
+		map : map,
+		icon : "img.png",
+		animation : google.maps.Animation.DROP,
+		position: mapCenter
+		
+		});
+		
+		var info = new google.maps.InfoWindow({
+		content: "It's Me"
+		});
+		google.maps.event.addListener(myLoc, "click", function(){
+			info.open(map, myLoc);
+		});
+	  
+	
+var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < rows.length; i++) { 
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(rows[i][1], rows[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(rows[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }	
+		
+$("#map_canvas").trigger('create');	
+}
+	
+		navigator.geolocation.getCurrentPosition(mysuccess);
+});		
+</script> 
+</body>
+</html>
